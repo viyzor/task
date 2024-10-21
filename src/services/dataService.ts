@@ -1,6 +1,10 @@
 import { Reading } from '../models/reading';
 import { addReadingToDB, getReadingFromDB } from '../database/database';
 
+/**
+ * Adds readings from raw data to the database.
+ * Returns { success: true } if data is valid, otherwise { success: false }.
+ */
 export const addReading = (rawData: string[]): { success: boolean } => {
     const parsedData: Reading[] = [];
 
@@ -22,12 +26,12 @@ export const addReading = (rawData: string[]): { success: boolean } => {
     return { success: true };
 };
 
+/**
+ * Gets readings from the database for the given date range.
+ */
 export const getReadingsInRange = (from: string, to: string) => {
-    // Преобразуем строки дат в начало и конец дня
     const fromDate = new Date(from);
     const toDate = new Date(to);
-
-    console.log('Filtering from:', fromDate.getTime(), 'to:', toDate.getTime());
 
     return getReadingFromDB(fromDate, toDate);
 };
